@@ -1,17 +1,5 @@
 $("#enviarCadastro").click(cadastro);
 
-    $("#matricula").keyup(function(event){
-            if(event.key === "Enter"){
-               $("senha").focus();
-            }
-        });
-
-    $("#senha").keyup(function(event){
-        if(event.key === "Enter"){
-            enviarLogin();
-        }
-    });
-
     function cadastro(){
         let nome = $("#nome").val();
         let idade = $("#idade").val();
@@ -32,12 +20,13 @@ $("#enviarCadastro").click(cadastro);
             success: function (data){
                 if(data){
                     alert("Deu bom");
+                    window.location.href="/";
                 }else{
-                    alert("Deu ruim")
+                    alert(data);
                 }
             },
-            error: function{
-                alert("Deu muito ruim");
+            error: function (){
+                alert(data);
             }
         });
     }

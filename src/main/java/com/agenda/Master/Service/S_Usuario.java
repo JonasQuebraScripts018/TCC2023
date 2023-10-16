@@ -27,6 +27,7 @@ public class S_Usuario {
     public static String cadastrarUsuario(String nome, String idade, String email, String cpf, String senha){
         boolean podeEnviar = true;
         String mensagem = "";
+        cpf = S_Generico.cleanerNumber(cpf);
         if(S_Generico.textoEstaVazio(nome)){
             podeEnviar = false;
             mensagem += "O Nome precisa ser informado!!";
@@ -35,11 +36,11 @@ public class S_Usuario {
             podeEnviar = false;
             mensagem += "A Idade precisa ser informada!!";
         }
-        if(S_Generico.validarEmail(email)){
+        if(!S_Generico.validarEmail(email)){
             podeEnviar = false;
             mensagem += "Email Invalido!!";
         }
-        if(S_CpfValidator.validateCPF(S_Generico.cleanerNumber(cpf))){
+        if(!S_CpfValidator.validateCPF(cpf)){
             podeEnviar = false;
             mensagem += "CPF Invalido!!";
         }

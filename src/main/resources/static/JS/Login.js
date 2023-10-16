@@ -1,20 +1,8 @@
 $("#enviarLogin").click(Login);
 
-    $("#cpf").keyup(function(event){
-            if(event.key === "Enter"){
-               $("senha").focus();
-            }
-        });
-
-    $("#senha").keyup(function(event){
-        if(event.key === "Enter"){
-            enviarLogin();
-        }
-    });
-
 function Login(){
     let cpf = $("#cpf").val();
-    let senha = $("$senha").val();
+    let senha = $("#senha").val();
 
     $.ajax({
         type: "POST",
@@ -29,9 +17,9 @@ function Login(){
             }else{
                 alert(data);
             }
-        }
+        },
         error: function (){
-            alert("Deu muito ruim!!");
+            alert(data);
         }
     });
 }
