@@ -5,6 +5,8 @@ import com.agenda.Master.Repository.R_Usuario;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class S_Usuario {
     private static R_Usuario r_usuario;
@@ -64,5 +66,19 @@ public class S_Usuario {
             }
         }
         return mensagem;
+    }
+
+    public static ArrayList<M_Usuario> searchbar(String nome){
+        boolean podePesquisar = true;
+        String mensagem = "";
+
+        if(S_Generico.textoEstaVazio(nome)){
+            try {
+                return r_usuario.BuscarPorNome(nome);
+            } catch (DataIntegrityViolationException e){
+                return null;
+            }
+        }
+        return null;
     }
 }
