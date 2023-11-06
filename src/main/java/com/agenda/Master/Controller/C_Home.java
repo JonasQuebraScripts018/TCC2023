@@ -23,6 +23,12 @@ public class C_Home {
         }
     }
 
+    @GetMapping("/hominha")
+    public String getHominha(Model model, HttpSession session){
+        model.addAttribute("usuario", session.getAttribute("usuario"));
+        return "Home/hominha";
+    }
+
     @PostMapping("/searchBar")
     public ArrayList<M_Usuario> setSearchBar(@RequestParam("nome") String nome){
         return S_Usuario.searchbar(nome);
