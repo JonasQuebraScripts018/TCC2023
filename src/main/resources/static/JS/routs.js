@@ -18,13 +18,6 @@ function controleRotasGet(url){
         case "/home":
                     $.get(url,function(data){
                         $(".container").html(data);
-                        $("#nome").keyup(function(){
-                            const nome = $(this).val().toLowerCase().trim();
-
-                            $(".li").each(function(){
-                                const nomeP = $(this).find("")
-                            })
-                        });
                     });
                     break;
         case "/edit/usuario":
