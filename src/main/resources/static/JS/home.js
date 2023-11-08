@@ -45,3 +45,14 @@ function alertaSucesso(mensagem){
         timer: 2000
     });
 }
+
+function addReserva(){
+    let dataReserva = $("#data").val()+' 00:00:00 -0300';
+
+    $("#listaReservas").prepend('<tr>'+
+                                    '<td>'+new Date().toLocaleDateString()+'</td>'+
+                                    '<td>'+new Date(dataReserva).toLocaleDateString()+'</td>'+
+                                '</tr>');
+    document.getElementById('data').value = '';
+    $('#novaReserva').modal('hide');
+}

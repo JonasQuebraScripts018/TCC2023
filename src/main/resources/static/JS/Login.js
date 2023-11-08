@@ -1,5 +1,17 @@
 $("#enviarLogin").click(Login);
 
+$("#cpf").keyup(function(event){
+    if (event.key === "Enter") {
+        $("#senha").focus();
+    }
+});
+
+$("#senha").keyup(function(event){
+    if (event.key === "Enter") {
+        Login();
+    }
+});
+
 function Login(){
     let cpf = $("#cpf").val();
     let senha = $("#senha").val();

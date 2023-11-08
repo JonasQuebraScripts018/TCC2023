@@ -13,7 +13,7 @@
     color: white;
 }
 .cabecalho-calendario{
-    background: #229922;
+    background: #108dd3;
     border-top-left-radius: 0.8em;
     border-top-right-radius: 0.8em;
     height: 14vh;
@@ -32,8 +32,8 @@
 .dia-ativo{
     font-size: 1.3em;
     font-weight: bold;
-    color: #007700 !important;
-    background: #ddffdd !important;
+    color: #108dd3 !important;
+    background: #108dd129 !important;
 }
 .outro-mes{
     background: #eee !important;
@@ -65,7 +65,7 @@
 	width: 8px;
 }
 td:hover{
-    box-shadow: inset 0px 0px 3px 1px #0f0;
+    box-shadow: inset 0px 0px 3px 1px #110dd9;
     cursor: pointer;
 }
 td,i{
