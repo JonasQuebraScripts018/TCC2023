@@ -46,13 +46,49 @@ function alertaSucesso(mensagem){
     });
 }
 
-function addReserva(){
-    let dataReserva = $("#data").val()+' 00:00:00 -0300';
+function addReserva() {
+    if ($("#dataI").val() != '' && $("#dataF").val() != '') {
+        let dataReserva = $("#dataI").val() + ' 00:00:00 -0300';
+        let dataFim = $("#dataF").val() + ' 00:00:00 -0300';
+        let numLinhas = $("#listaReservas tbody tr").length + 1;
+        let a = 1;
+        $("#listaReservas")
+            .prepend('<tr>' +
+                '<td>' + new Date(dataReserva).toLocaleDateString() + '</td>' +
+                '<td>' + new Date(dataFim).toLocaleDateString() + '</td>' +
+                '</tr>');
 
-    $("#listaReservas").prepend('<tr>'+
-                                    '<td>'+new Date().toLocaleDateString()+'</td>'+
-                                    '<td>'+new Date(dataReserva).toLocaleDateString()+'</td>'+
-                                '</tr>');
-    document.getElementById('data').value = '';
-    $('#novaReserva').modal('hide');
+        document.getElementById('dataI').value = '';
+        document.getElementById('dataF').value = '';
+        $('#novaReserva').modal('hide');
+
+
+
+        let gambarra = dataReserva;
+        let mes;
+        let dia;
+        while(new Date(gambarra) <= new Date(dataFim)){
+
+            mes = new Date(gambarra).getMonth();
+            dia = new Date(gambarra).getDate();
+
+            $('#otoMeis'+a).removeClass("outro-mes");
+            $('#otoMeis'+a).addClass("dia-pintado");
+
+            new Date(gambarra).setDate(new Date(gambarra).getDate() + 1);
+        }
+
+        for(mesA; mesA <= mesb; mesA++){
+            if(mesA == mesb){
+                for(diaI; diaI <= diaF; diaI ++){
+                    $('#dia'+diaI).addClass("dia-pintado");
+                }
+            }
+
+            a++;
+        }
+
+    } else {
+        alert("Data inválida");
+    }
 }
