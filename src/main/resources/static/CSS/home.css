@@ -48,10 +48,10 @@
     width: 50%;
 }
 .ring-left, .ring-right { position: relative;
-	top: -60vh;
+	top: -47vh;
 }
 .ring-right {
-	top: -60vh;
+	top: -47vh;
 	left: calc(100% - 3.5em);
 }
 .ring-left:before,

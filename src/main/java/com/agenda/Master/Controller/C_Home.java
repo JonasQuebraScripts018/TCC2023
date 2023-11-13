@@ -1,6 +1,7 @@
 package com.agenda.Master.Controller;
 
 import com.agenda.Master.Model.M_Usuario;
+import com.agenda.Master.Service.S_Cronograma;
 import com.agenda.Master.Service.S_Usuario;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,13 @@ public class C_Home {
         }else{
             return "redirect:/";
         }
+    }
+
+    @PostMapping("/home")
+    @ResponseBody
+    public String postHome(@RequestParam("dataini") String dataini,
+                           @RequestParam("datafini") String datafini){
+        return S_Cronograma.salvarCronograma(dataini, datafini);
     }
 
     @GetMapping("/hominha")

@@ -59,13 +59,13 @@ function createCalendar(data){
     for(let i = 0; i < diaDaSemana; i++){
         a++;
         dia.setDate(dia.getDate()+1);
-        $("#linha1").append('<td id="meisAnterior'+a+'" class="outro-mes">'+dia.getDate()+'</td>');
+        $("#linha1").append('<td id="m'+dia.getMonth()+'d'+dia.getDate()+'" class="outro-mes">'+dia.getDate()+'</td>');
     }
 
     //cria dias do mês atual
     for(let i = 1; i <= ultimoDiaMes.getDate(); i++){
         primeiroDiaMes.setDate(i);
-        $("#linha"+linha).append('<td id="dia'+i+'" '+(primeiroDiaMes.getDate() == diaAtual ? 'class="dia-ativo"': '' )+'>'+
+        $("#linha"+linha).append('<td id="m'+primeiroDiaMes.getMonth()+'d'+primeiroDiaMes.getDate()+'" '+(primeiroDiaMes.getDate() == diaAtual ? 'class="dia-ativo"': '' )+'>'+
             primeiroDiaMes.getDate()+'</td>');
 
         if(primeiroDiaMes.getDay() === 6){
@@ -80,6 +80,7 @@ function createCalendar(data){
     diaDaSemana = ultimoDiaMes.getDay();
     for(let i = 6; i > diaDaSemana; i--){
         a++;
-        $("#linha"+linha).append('<td id="otoMeis'+a+'" class="outro-mes">0'+(7-i)+'</td>');
+        let dataTeste = new Date(data.getYear()+1900,data.getMonth()+1,(7-i));
+        $("#linha"+linha).append('<td id="m'+dataTeste.getMonth()+'d'+dataTeste.getDate()+'" class="outro-mes">0'+(7-i)+'</td>');
     }
 }

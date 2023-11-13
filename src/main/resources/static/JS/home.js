@@ -46,49 +46,52 @@ function alertaSucesso(mensagem){
     });
 }
 
-function addReserva() {
-    if ($("#dataI").val() != '' && $("#dataF").val() != '') {
-        let dataReserva = $("#dataI").val() + ' 00:00:00 -0300';
-        let dataFim = $("#dataF").val() + ' 00:00:00 -0300';
+$("#enviarCronograma").click(trySaveInTheBank);
+
+function trySaveInTheBank(){
+    let dataini = $("#dataini").val();
+    let datafini = $("#datafini").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/home",
+        data: {
+            dataini: dataini,
+            datafini: datafini,
+        },
+        success: function (data){
+            alert("Deu bom");
+            PintaDia(dataini, datafini);
+        },
+        error: function (){
+            alert("Deu Ruim");
+        }
+    });
+}
+
+function CriarCronograma(dataini,datafini) {
         let numLinhas = $("#listaReservas tbody tr").length + 1;
-        let a = 1;
-        $("#listaReservas")
-            .prepend('<tr>' +
-                '<td>' + new Date(dataReserva).toLocaleDateString() + '</td>' +
-                '<td>' + new Date(dataFim).toLocaleDateString() + '</td>' +
+        $("#listaReservas").prepend('<tr>' +
+                '<td>' + new Date(dataini).toLocaleDateString() + '</td>' +
+                '<td>' + new Date(datafini).toLocaleDateString() + '</td>' +
                 '</tr>');
 
-        document.getElementById('dataI').value = '';
-        document.getElementById('dataF').value = '';
         $('#novaReserva').modal('hide');
+}
 
+function PintaDia(dataini, datafini){
+    let gambarra = new Date(dataini + '00:00:00 -0300');
+    let mes;
+    let dia;
 
+    while(new Date(gambarra) <= new Date(dataini + '00:00:00 -0300')){
+        mes = new Date(gambarra).getMonth();
+        dia = new Date(gambarra).getDate();
 
-        let gambarra = dataReserva;
-        let mes;
-        let dia;
-        while(new Date(gambarra) <= new Date(dataFim)){
+        $('#m'+mes+'d'+dia).removeClass("outro-mes");
+        $('#m'+mes+'d'+dia).addClass("dia-pintado");
 
-            mes = new Date(gambarra).getMonth();
-            dia = new Date(gambarra).getDate();
-
-            $('#otoMeis'+a).removeClass("outro-mes");
-            $('#otoMeis'+a).addClass("dia-pintado");
-
-            new Date(gambarra).setDate(new Date(gambarra).getDate() + 1);
-        }
-
-        for(mesA; mesA <= mesb; mesA++){
-            if(mesA == mesb){
-                for(diaI; diaI <= diaF; diaI ++){
-                    $('#dia'+diaI).addClass("dia-pintado");
-                }
-            }
-
-            a++;
-        }
-
-    } else {
-        alert("Data inválida");
+        gambarra = new Date(gambarra).setDate(new Date(gambarra).getDate() + 1);
     }
+    CriarCronograma(dataini, datafini);
 }
