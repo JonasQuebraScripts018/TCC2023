@@ -11,9 +11,17 @@ public class M_Cronograma {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
 
     private int id;
-
     private Date dataini;
     private Date datafini;
+    private int id_pessoa;
+
+    public int getId_pessoa() {
+        return id_pessoa;
+    }
+
+    public void setId_pessoa(int id_pessoa) {
+        this.id_pessoa = id_pessoa;
+    }
 
     public int getId() {
         return id;

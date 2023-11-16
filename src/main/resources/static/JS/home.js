@@ -69,29 +69,39 @@ function trySaveInTheBank(){
     });
 }
 
-function CriarCronograma(dataini,datafini) {
-        let numLinhas = $("#listaReservas tbody tr").length + 1;
-        $("#listaReservas").prepend('<tr>' +
-                '<td>' + new Date(dataini).toLocaleDateString() + '</td>' +
-                '<td>' + new Date(datafini).toLocaleDateString() + '</td>' +
-                '</tr>');
+function CriarCronograma(dataini, datafini) {
+    // Converta as datas em objetos Date especificando o fuso horário
+    let startDate = new Date(dataini + 'T00:00:00');
+    let endDate = new Date(datafini + 'T00:00:00');
 
-        $('#novaReserva').modal('hide');
+    let numLinhas = $("#listaReservas tbody tr").length + 1;
+    $("#listaReservas").prepend('<tr>' +
+        '<td>' + startDate.toLocaleDateString() + '</td>' +
+        '<td>' + endDate.toLocaleDateString() + '</td>' +
+        '</tr>');
+
+    $('#novaReserva').modal('hide');
 }
 
-function PintaDia(dataini, datafini){
-    let gambarra = new Date(dataini + '00:00:00 -0300');
-    let mes;
-    let dia;
+function PintaDia(dataini, datafini) {
+    // Converta as datas iniciais e finais para objetos Date
+    let startDate = new Date(dataini + 'T00:00:00');
+    let endDate = new Date(datafini + 'T00:00:00');
 
-    while(new Date(gambarra) <= new Date(dataini + '00:00:00 -0300')){
-        mes = new Date(gambarra).getMonth();
-        dia = new Date(gambarra).getDate();
+    // Use a data inicial como data de referência para iterar
+    let currentDate = new Date(startDate);
 
-        $('#m'+mes+'d'+dia).removeClass("outro-mes");
-        $('#m'+mes+'d'+dia).addClass("dia-pintado");
+    // Continue enquanto a data atual for menor ou igual à data final
+    while (currentDate <= endDate) {
+        let mes = currentDate.getMonth();
+        let dia = currentDate.getDate();
 
-        gambarra = new Date(gambarra).setDate(new Date(gambarra).getDate() + 1);
+        $('#m' + mes + 'd' + dia).removeClass("outro-mes");
+        $('#m' + mes + 'd' + dia).addClass("dia-pintado");
+
+        // Incremente a data atual em um dia
+        currentDate.setDate(currentDate.getDate() + 1);
     }
+
     CriarCronograma(dataini, datafini);
 }
