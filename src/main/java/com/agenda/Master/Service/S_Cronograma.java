@@ -1,41 +1,54 @@
 package com.agenda.Master.Service;
 
 import com.agenda.Master.Model.M_Cronograma;
+import com.agenda.Master.Model.M_Usuario;
 import com.agenda.Master.Repository.R_Cronograma;
-import com.agenda.Master.Repository.R_Usuario;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
 
 @Service
 public class S_Cronograma {
     private static R_Cronograma r_cronograma;
+    private static M_Usuario m_usuario;
 
     public S_Cronograma(R_Cronograma r_cronograma){
         this.r_cronograma = r_cronograma;
     }
-    public static String salvarCronograma(String dataini, String datafini){
+
+    // Função para salvar o cronograma associado ao usuário da sessão
+    public static String salvarCronograma(String dataini, String datafini, M_Usuario m_usuario) {
         boolean podeSalvar = true;
         String mensagem = "";
-        if(S_Generico.textoEstaVazio(dataini)){
+
+        if (S_Generico.textoEstaVazio(dataini)) {
             podeSalvar = false;
-            mensagem += "Pricisa ser informado um Data Inicial!";
+            mensagem += "Precisa ser informada uma Data Inicial!";
         }
-        if(S_Generico.textoEstaVazio(datafini)){
+        if (S_Generico.textoEstaVazio(datafini)) {
             podeSalvar = false;
-            mensagem += "Precisa ser informado uma Data final!";
+            mensagem += "Precisa ser informada uma Data final!";
         }
-        if(podeSalvar){
+
+        if (podeSalvar) {
             M_Cronograma m_cronograma = new M_Cronograma();
             m_cronograma.setDataini(Date.valueOf(dataini));
             m_cronograma.setDatafini(Date.valueOf(datafini));
-            try{
+            m_cronograma.setId_pessoa(Integer.parseInt(m_usuario.getId().toString()));
+            try {
                 r_cronograma.save(m_cronograma);
-            }catch (DataIntegrityViolationException e){
+            } catch (DataIntegrityViolationException e) {
                 mensagem += "Deu ruim";
             }
         }
         return mensagem;
+    }
+
+
+    public static List<M_Cronograma> buscarCronograma(M_Usuario usuario){
+        return r_cronograma.BuscarCronogramaPorUsuario(usuario.getId());
     }
 }

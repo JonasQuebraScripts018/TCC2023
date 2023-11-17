@@ -70,7 +70,6 @@ function trySaveInTheBank(){
 }
 
 function CriarCronograma(dataini, datafini) {
-    // Converta as datas em objetos Date especificando o fuso horário
     let startDate = new Date(dataini + 'T00:00:00');
     let endDate = new Date(datafini + 'T00:00:00');
 
@@ -84,14 +83,11 @@ function CriarCronograma(dataini, datafini) {
 }
 
 function PintaDia(dataini, datafini) {
-    // Converta as datas iniciais e finais para objetos Date
     let startDate = new Date(dataini + 'T00:00:00');
     let endDate = new Date(datafini + 'T00:00:00');
 
-    // Use a data inicial como data de referência para iterar
     let currentDate = new Date(startDate);
 
-    // Continue enquanto a data atual for menor ou igual à data final
     while (currentDate <= endDate) {
         let mes = currentDate.getMonth();
         let dia = currentDate.getDate();
@@ -99,7 +95,6 @@ function PintaDia(dataini, datafini) {
         $('#m' + mes + 'd' + dia).removeClass("outro-mes");
         $('#m' + mes + 'd' + dia).addClass("dia-pintado");
 
-        // Incremente a data atual em um dia
         currentDate.setDate(currentDate.getDate() + 1);
     }
 

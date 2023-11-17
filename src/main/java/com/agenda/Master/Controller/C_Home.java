@@ -18,6 +18,7 @@ public class C_Home {
     @GetMapping("/home")
     public String getHome(HttpSession session, Model model){
         if(session.getAttribute("usuario") != null){
+            model.addAttribute("cronogramas",S_Cronograma.buscarCronograma((M_Usuario) session.getAttribute("usuario")));
             model.addAttribute("usuario", session.getAttribute("usuario"));
             return "Home/home";
         }else{
@@ -28,8 +29,10 @@ public class C_Home {
     @PostMapping("/home")
     @ResponseBody
     public String postHome(@RequestParam("dataini") String dataini,
-                           @RequestParam("datafini") String datafini){
-        return S_Cronograma.salvarCronograma(dataini, datafini);
+                           @RequestParam("datafini") String datafini,
+                           HttpSession session
+                           ){
+        return S_Cronograma.salvarCronograma(dataini, datafini, (M_Usuario) session.getAttribute("usuario"));
     }
 
     @GetMapping("/hominha")
