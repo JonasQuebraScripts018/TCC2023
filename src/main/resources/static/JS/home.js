@@ -60,14 +60,16 @@ function trySaveInTheBank(){
             datafini: datafini,
         },
         success: function (data){
-            alert("Deu bom");
             PintaDia(dataini, datafini);
+            alert("Deu bom");
         },
         error: function (){
             alert("Deu Ruim");
         }
     });
 }
+
+let a = 1;
 
 function CriarCronograma(dataini, datafini) {
     let startDate = new Date(dataini + 'T00:00:00');
@@ -77,8 +79,9 @@ function CriarCronograma(dataini, datafini) {
     $("#listaReservas").prepend('<tr>' +
         '<td>' + startDate.toLocaleDateString() + '</td>' +
         '<td>' + endDate.toLocaleDateString() + '</td>' +
+        '<td> <button id="'+a+'" class="btn btn-primary" href="PintaDia('+dataini+', '+datafini+')">Criar</button>' +
         '</tr>');
-
+    a++;
     $('#novaReserva').modal('hide');
 }
 
