@@ -18,7 +18,7 @@ public class C_Home {
     @GetMapping("/home")
     public String getHome(HttpSession session, Model model){
         if(session.getAttribute("usuario") != null){
-            model.addAttribute("cronogramas",S_Cronograma.buscarCronograma((M_Usuario) session.getAttribute("usuario")));
+            model.addAttribute("cronogramas",S_Cronograma.buscarCronograma());
             model.addAttribute("usuario", session.getAttribute("usuario"));
             return "Home/home";
         }else{

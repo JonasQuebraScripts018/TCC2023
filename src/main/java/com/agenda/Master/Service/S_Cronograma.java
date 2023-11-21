@@ -8,6 +8,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,8 +37,8 @@ public class S_Cronograma {
 
         if (podeSalvar) {
             M_Cronograma m_cronograma = new M_Cronograma();
-            m_cronograma.setDataini(Date.valueOf(dataini));
-            m_cronograma.setDatafini(Date.valueOf(datafini));
+            m_cronograma.setDataini(LocalDateTime.parse(dataini));
+            m_cronograma.setDatafini(LocalDateTime.parse(datafini));
             m_cronograma.setId_pessoa(Integer.parseInt(m_usuario.getId().toString()));
             try {
                 r_cronograma.save(m_cronograma);
@@ -48,7 +50,7 @@ public class S_Cronograma {
     }
 
 
-    public static List<M_Cronograma> buscarCronograma(M_Usuario usuario){
-        return r_cronograma.BuscarCronogramaPorUsuario(usuario.getId());
+    public static ArrayList<M_Cronograma> buscarCronograma(){
+        return r_cronograma.BuscarPorCronograma();
     }
 }

@@ -36,7 +36,7 @@ function createCalendar(data){
         diaAtual = data.getDate();
     }
 
-    $("tbody").text("");
+    $("#calendarBody").text("");
     const nomeMeses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho",
                         "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
 
@@ -55,7 +55,7 @@ function createCalendar(data){
     //cria dias do mês anterior.
     let dia = new Date(primeiroDiaMes);
     dia.setDate((diaDaSemana*-1))
-    $("tbody").append('<tr id="linha1"></tr>');
+    $("#calendarBody").append('<tr id="linha1"></tr>');
     for(let i = 0; i < diaDaSemana; i++){
         a++;
         dia.setDate(dia.getDate()+1);
@@ -70,7 +70,7 @@ function createCalendar(data){
 
         if(primeiroDiaMes.getDay() === 6){
             linha++;
-            $("tbody").append('<tr id="linha'+linha+'"></tr>');
+            $("#calendarBody").append('<tr id="linha'+linha+'"></tr>');
         }
     }
 

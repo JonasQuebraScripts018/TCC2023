@@ -103,3 +103,17 @@ function PintaDia(dataini, datafini) {
 
     CriarCronograma(dataini, datafini);
 }
+
+function CarregarCronograma(dataini, datafini) {
+    let startDate = new Date(dataini + 'T00:00:00');
+    let endDate = new Date(datafini + 'T00:00:00');
+
+    let numLinhas = $("#listaReservas tbody tr").length + 1;
+    $("#listaReservas").prepend('<tr th:if="${usuario.id == cronograma.id_pessoa}" th:each="cronograma: ${cronogramas}">' +
+        '<td th:text="${#temporals.format(cronograma.dataini, dd/mm/yyyy HH:mm)}"></td>' +
+        '<td th:text="${#temporals.format(cronograma.datafini, dd/mm/yyyy HH:mm)}"></td>' +
+        '<td> <button id="banco'+a+'" class="btn btn-primary" href="PintaDia('+dataini+', '+datafini+')">Criar</button>' +
+        '</tr>');
+    a++;
+    $('#novaReserva').modal('hide');
+}

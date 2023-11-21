@@ -2,6 +2,7 @@ package com.agenda.Master.Model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -11,8 +12,8 @@ public class M_Cronograma {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
 
     private int id;
-    private Date dataini;
-    private Date datafini;
+    private LocalDateTime dataini;
+    private LocalDateTime datafini;
     private int id_pessoa;
 
     public int getId_pessoa() {
@@ -31,19 +32,19 @@ public class M_Cronograma {
         this.id = id;
     }
 
-    public Date getDataini() {
+    public LocalDateTime getDataini() {
         return dataini;
     }
 
-    public void setDataini(Date dataini) {
+    public void setDataini(LocalDateTime dataini) {
         this.dataini = dataini;
     }
 
-    public Date getDatafini() {
+    public LocalDateTime getDatafini() {
         return datafini;
     }
 
-    public void setDatafini(Date datafini) {
+    public void setDatafini(LocalDateTime datafini) {
         this.datafini = datafini;
     }
 }
