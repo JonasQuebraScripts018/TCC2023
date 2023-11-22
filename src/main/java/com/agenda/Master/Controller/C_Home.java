@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Controller
@@ -28,8 +29,8 @@ public class C_Home {
 
     @PostMapping("/home")
     @ResponseBody
-    public String postHome(@RequestParam("dataini") String dataini,
-                           @RequestParam("datafini") String datafini,
+    public String postHome(@RequestParam("dataini") LocalDateTime dataini,
+                           @RequestParam("datafini") LocalDateTime datafini,
                            HttpSession session
                            ){
         return S_Cronograma.salvarCronograma(dataini, datafini, (M_Usuario) session.getAttribute("usuario"));

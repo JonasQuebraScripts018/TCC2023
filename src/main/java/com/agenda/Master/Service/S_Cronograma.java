@@ -22,23 +22,23 @@ public class S_Cronograma {
     }
 
     // Função para salvar o cronograma associado ao usuário da sessão
-    public static String salvarCronograma(String dataini, String datafini, M_Usuario m_usuario) {
+    public static String salvarCronograma(LocalDateTime dataini, LocalDateTime datafini, M_Usuario m_usuario) {
         boolean podeSalvar = true;
         String mensagem = "";
 
-        if (S_Generico.textoEstaVazio(dataini)) {
+        if (S_Generico.textoEstaVazio(String.valueOf(dataini))) {
             podeSalvar = false;
             mensagem += "Precisa ser informada uma Data Inicial!";
         }
-        if (S_Generico.textoEstaVazio(datafini)) {
+        if (S_Generico.textoEstaVazio(String.valueOf(datafini))) {
             podeSalvar = false;
             mensagem += "Precisa ser informada uma Data final!";
         }
 
         if (podeSalvar) {
             M_Cronograma m_cronograma = new M_Cronograma();
-            m_cronograma.setDataini(LocalDateTime.parse(dataini));
-            m_cronograma.setDatafini(LocalDateTime.parse(datafini));
+            m_cronograma.setDataini(dataini);
+            m_cronograma.setDatafini(datafini);
             m_cronograma.setId_pessoa(Integer.parseInt(m_usuario.getId().toString()));
             try {
                 r_cronograma.save(m_cronograma);

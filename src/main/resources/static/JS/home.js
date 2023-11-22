@@ -72,22 +72,22 @@ function trySaveInTheBank(){
 let a = 1;
 
 function CriarCronograma(dataini, datafini) {
-    let startDate = new Date(dataini + 'T00:00:00');
-    let endDate = new Date(datafini + 'T00:00:00');
+    let startDate = new Date(dataini);
+    let endDate = new Date(datafini);
 
     let numLinhas = $("#listaReservas tbody tr").length + 1;
     $("#listaReservas").prepend('<tr>' +
-        '<td>' + startDate.toLocaleDateString() + '</td>' +
-        '<td>' + endDate.toLocaleDateString() + '</td>' +
-        '<td> <button id="'+a+'" class="btn btn-primary" href="PintaDia('+dataini+', '+datafini+')">Criar</button>' +
+        '<td>' + startDate.toLocaleDateString() +' '+ startDate.toLocaleTimeString() + '</td>' +
+        '<td>' + endDate.toLocaleDateString() + ' ' + endDate.toLocaleTimeString() + '</td>' +
+        '<td> <button class="btn btn-sm btn-primary" onclick="PintaDia('+dataini+', '+datafini+')">Criar</button>' +
         '</tr>');
     a++;
     $('#novaReserva').modal('hide');
 }
 
 function PintaDia(dataini, datafini) {
-    let startDate = new Date(dataini + 'T00:00:00');
-    let endDate = new Date(datafini + 'T00:00:00');
+    let startDate = new Date(dataini);
+    let endDate = new Date(datafini);
 
     let currentDate = new Date(startDate);
 
@@ -102,18 +102,4 @@ function PintaDia(dataini, datafini) {
     }
 
     CriarCronograma(dataini, datafini);
-}
-
-function CarregarCronograma(dataini, datafini) {
-    let startDate = new Date(dataini + 'T00:00:00');
-    let endDate = new Date(datafini + 'T00:00:00');
-
-    let numLinhas = $("#listaReservas tbody tr").length + 1;
-    $("#listaReservas").prepend('<tr th:if="${usuario.id == cronograma.id_pessoa}" th:each="cronograma: ${cronogramas}">' +
-        '<td th:text="${#temporals.format(cronograma.dataini, dd/mm/yyyy HH:mm)}"></td>' +
-        '<td th:text="${#temporals.format(cronograma.datafini, dd/mm/yyyy HH:mm)}"></td>' +
-        '<td> <button id="banco'+a+'" class="btn btn-primary" href="PintaDia('+dataini+', '+datafini+')">Criar</button>' +
-        '</tr>');
-    a++;
-    $('#novaReserva').modal('hide');
 }
