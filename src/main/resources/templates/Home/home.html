@@ -126,16 +126,18 @@
                 <table class="table table-striped text-center">
                     <thead id="cabListaReservas">
                     <tr>
-                        <th width="33.33%">Data Inicio</th>
-                        <th width="33.33%">Data Final</th>
-                        <th width="33.33%">Criar Marcação</th>
+                        <th width="25%">Data Inicio</th>
+                        <th width="25%">Data Final</th>
+                        <th width="25%">Criar Marcação</th>
+                        <th width="25%">Apagar Marcação</th>
                     </tr>
                     </thead>
                     <tbody id="listaReservas">
                     <tr th:each="cronograma: ${cronogramas}">
-                        <td th:text="${#temporals.format(cronograma.dataini, 'dd/MM/yyyy HH:mm')}"></td>
-                        <td th:text="${#temporals.format(cronograma.datafini, 'dd/MM/yyyy HH:mm')}"></td>
-                        <td><button th:id="${cronograma.id}" class="btn btn-sm btn-primary">Criar</button></td>
+                        <td th:id="${'dataini' + cronograma.id}" th:text="${#temporals.format(cronograma.dataini, 'dd/MM/yyyy HH:mm')}"></td>
+                        <td th:id="${'datafini' + cronograma.id}" th:text="${#temporals.format(cronograma.datafini, 'dd/MM/yyyy HH:mm')}"></td>
+                        <td><button th:id="${cronograma.id}"  class="btn btn-sm btn-primary id-referer">Criar</button></td>
+                        <td><button th:id="${'r'+cronograma.id}"  class="btn btn-sm btn-danger id-referer-r">Remover</button></td>
                     </tr>
                     </tbody>
                 </table>

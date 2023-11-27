@@ -11,24 +11,24 @@ public class M_Cronograma {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
 
-    private int id;
+    private Long id;
     private LocalDateTime dataini;
     private LocalDateTime datafini;
-    private int id_pessoa;
+    private Long id_pessoa;
 
-    public int getId_pessoa() {
+    public Long getId_pessoa() {
         return id_pessoa;
     }
 
-    public void setId_pessoa(int id_pessoa) {
+    public void setId_pessoa(Long id_pessoa) {
         this.id_pessoa = id_pessoa;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

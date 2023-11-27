@@ -1,5 +1,6 @@
 package com.agenda.Master.Controller;
 
+import com.agenda.Master.Model.M_Resposta;
 import com.agenda.Master.Model.M_Usuario;
 import com.agenda.Master.Service.S_Cronograma;
 import com.agenda.Master.Service.S_Usuario;
@@ -29,9 +30,9 @@ public class C_Home {
 
     @PostMapping("/home")
     @ResponseBody
-    public String postHome(@RequestParam("dataini") LocalDateTime dataini,
-                           @RequestParam("datafini") LocalDateTime datafini,
-                           HttpSession session
+    public M_Resposta postHome(@RequestParam("dataini") LocalDateTime dataini,
+                               @RequestParam("datafini") LocalDateTime datafini,
+                               HttpSession session
                            ){
         return S_Cronograma.salvarCronograma(dataini, datafini, (M_Usuario) session.getAttribute("usuario"));
     }

@@ -1,6 +1,7 @@
 package com.agenda.Master.Service;
 
 import com.agenda.Master.Model.M_Cronograma;
+import com.agenda.Master.Model.M_Resposta;
 import com.agenda.Master.Model.M_Usuario;
 import com.agenda.Master.Repository.R_Cronograma;
 import jakarta.servlet.http.HttpSession;
@@ -22,9 +23,10 @@ public class S_Cronograma {
     }
 
     // Função para salvar o cronograma associado ao usuário da sessão
-    public static String salvarCronograma(LocalDateTime dataini, LocalDateTime datafini, M_Usuario m_usuario) {
+    public static M_Resposta salvarCronograma(LocalDateTime dataini, LocalDateTime datafini, M_Usuario m_usuario) {
         boolean podeSalvar = true;
         String mensagem = "";
+        Long idNovo = null;
 
         if (S_Generico.textoEstaVazio(String.valueOf(dataini))) {
             podeSalvar = false;
@@ -39,14 +41,16 @@ public class S_Cronograma {
             M_Cronograma m_cronograma = new M_Cronograma();
             m_cronograma.setDataini(dataini);
             m_cronograma.setDatafini(datafini);
-            m_cronograma.setId_pessoa(Integer.parseInt(m_usuario.getId().toString()));
+            m_cronograma.setId_pessoa(m_usuario.getId());
             try {
-                r_cronograma.save(m_cronograma);
+                M_Cronograma novoCronograma = r_cronograma.save(m_cronograma);
+                idNovo = Long.valueOf(novoCronograma.getId());
             } catch (DataIntegrityViolationException e) {
+                podeSalvar = false;
                 mensagem += "Deu ruim";
             }
         }
-        return mensagem;
+        return new M_Resposta(mensagem,podeSalvar, idNovo);
     }
 
 
