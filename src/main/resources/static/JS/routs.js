@@ -15,10 +15,26 @@ function controleRotasGet(url){
                 $("#enviar").click(cadastrarUsuario);
             });
             break;
-        case "/home":
+        case "/hominha":
                     $.get(url,function(data){
                         $("#mainFrame").html(data);
+                        createCalendar(new Date());
+                        $('.id-referer').click(getReservaDateRange);
+                        $(".id-referer-r").click(DisPintaDia);
+                        $("#next-month").click(function(){
+                                dataCalendario.setMonth(dataCalendario.getMonth()+1);
+                                setDateListaAtividades(dataCalendario);
+                                createCalendar(dataCalendario);
+                        });
+                        $("#previous-month").click(function(){
+                            dataCalendario.setMonth(dataCalendario.getMonth()-1);
+                            $("#ano").text(dataCalendario.getYear());
+                            setDateListaAtividades(dataCalendario);
+                            createCalendar(dataCalendario);
+                        });
+                        $("#enviarCronograma").click(trySaveInTheBank);
                     });
+
                     break;
         case "/edit/usuario":
                             $.get(url,function(data){

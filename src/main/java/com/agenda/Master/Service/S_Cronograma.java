@@ -53,6 +53,9 @@ public class S_Cronograma {
         return new M_Resposta(mensagem,podeSalvar, idNovo);
     }
 
+    public static M_Resposta deletarCronograma(){
+
+    }
 
     public static ArrayList<M_Cronograma> buscarCronograma(){
         return r_cronograma.BuscarPorCronograma();

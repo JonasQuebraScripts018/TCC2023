@@ -39,6 +39,7 @@ public class C_Home {
 
     @GetMapping("/hominha")
     public String getHominha(Model model, HttpSession session){
+        model.addAttribute("cronogramas",S_Cronograma.buscarCronograma());
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "Home/hominha";
     }
