@@ -37,6 +37,14 @@ public class C_Home {
         return S_Cronograma.salvarCronograma(dataini, datafini, (M_Usuario) session.getAttribute("usuario"));
     }
 
+    @PostMapping("/deletaCronogama")
+    @ResponseBody
+    public M_Resposta postCronograma(@RequestParam("nome" )String nome,
+                                    HttpSession session, Model model){
+        model.addAttribute("usuario", session.getAttribute("usuario"));
+        return S_Cronograma.deletarCronograma(nome);
+    }
+
     @GetMapping("/hominha")
     public String getHominha(Model model, HttpSession session){
         model.addAttribute("cronogramas",S_Cronograma.buscarCronograma());

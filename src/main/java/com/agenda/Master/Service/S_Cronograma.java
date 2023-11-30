@@ -27,6 +27,7 @@ public class S_Cronograma {
         boolean podeSalvar = true;
         String mensagem = "";
         Long idNovo = null;
+//        boolean ativo = true;
 
         if (S_Generico.textoEstaVazio(String.valueOf(dataini))) {
             podeSalvar = false;
@@ -42,6 +43,7 @@ public class S_Cronograma {
             m_cronograma.setDataini(dataini);
             m_cronograma.setDatafini(datafini);
             m_cronograma.setId_pessoa(m_usuario.getId());
+//            m_cronograma.setAtivo(ativo);
             try {
                 M_Cronograma novoCronograma = r_cronograma.save(m_cronograma);
                 idNovo = Long.valueOf(novoCronograma.getId());
@@ -53,8 +55,24 @@ public class S_Cronograma {
         return new M_Resposta(mensagem,podeSalvar, idNovo);
     }
 
-    public static M_Resposta deletarCronograma(){
+    public static M_Resposta deletarCronograma(String nome){
+        boolean podeDeleta = true;
+        String mensagem = "";
 
+        if(S_Generico.textoEstaVazio(nome)){
+            podeDeleta = false;
+            mensagem = "Nome invalido!";
+        }
+
+        if(podeDeleta){
+            try{
+                for(M_Cronograma cronograma : r_cronograma.buscarNome(nome))
+                r_cronograma.deleteById(cronograma.getId());
+            }catch (Exception e){
+
+            }
+        }
+        return new M_Resposta(mensagem,podeDeleta,null);
     }
 
     public static ArrayList<M_Cronograma> buscarCronograma(){

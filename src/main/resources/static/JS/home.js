@@ -66,9 +66,9 @@ function trySaveInTheBank(){
         },
         success: function (data){
             if(data.sucesso){
+                alert(data.mensagem);
                 PintaDia(dataini, datafini, data.id);
             }
-            alert(data.mensagem);
         },
         error: function (){
             alert("Deu Ruim");
@@ -86,6 +86,7 @@ function CriarCronograma(dataini, datafini, id) {
         '<td id="datafini'+id+'">' + endDate.toLocaleDateString() + ' ' + endDate.toLocaleTimeString() + '</td>' +
         '<td> <button id="'+id+'" class="btn btn-sm btn-primary id-referer">Criar</button>' +
         '<td> <button id="r'+id+'" class="btn btn-sm btn-danger id-referer-r">Remover</button>' +
+        '<td> <button id="d'+id+'" class="btn btn-sm btn-danger id-referer-d">Remover</button>' +
         '</tr>');
     $('#novaReserva').modal('hide');
     $('#'+id).click(PintaDia2);
@@ -211,4 +212,26 @@ function DisPintaDia() {
 
         currentDate.setDate(currentDate.getDate() + 1);
     }
+}
+
+$(".id-referer").click(deletaCronograma);
+
+function deletaCronograma(){
+    let nome = $("#nome").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/home",
+        data: {
+            nome : nome,
+        },
+        success: function (data){
+            if(data.sucesso){
+                alert(data.mensagem);
+            }
+        },
+        error: function(){
+            alert("Erro");
+        }
+    });
 }

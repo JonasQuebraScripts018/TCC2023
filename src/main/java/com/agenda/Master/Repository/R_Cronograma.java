@@ -14,6 +14,6 @@ public interface R_Cronograma extends JpaRepository<M_Cronograma, Long> {
     @Query(value = "SELECT * FROM Cronogramas ", nativeQuery = true)
     ArrayList<M_Cronograma> BuscarPorCronograma();
 
-    @Query(value = "SELECT * FROM Cronogramas WHERE id_pessoa = :id", nativeQuery = true)
-    List<M_Cronograma> BuscarCronogramaPorUsuario(@Param("id") Long id);
+    @Query(value = "SELECT * FROM Cronogramas WHERE nome = :nome", nativeQuery = true)
+    ArrayList<M_Cronograma> buscarNome(@Param("nome") String nome);
 }
