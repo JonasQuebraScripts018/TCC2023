@@ -22,7 +22,7 @@
     background: #fafafa;
     border-bottom-left-radius: 0.8em;
     border-bottom-right-radius: 0.8em;
-    height: 30.3vh;
+    height: 34.3vh;
     padding: 30px 10px 10px 10px;
 }
 .texto-cabecalho-calendario{
@@ -48,10 +48,10 @@
     width: 50%;
 }
 .ring-left, .ring-right { position: relative;
-	top: -47vh;
+	top: -37vh;
 }
 .ring-right {
-	top: -47vh;
+	top: -37    vh;
 	left: calc(100% - 3.5em);
 }
 .ring-left:before,

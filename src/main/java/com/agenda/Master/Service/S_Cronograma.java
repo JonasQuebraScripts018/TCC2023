@@ -27,7 +27,7 @@ public class S_Cronograma {
         boolean podeSalvar = true;
         String mensagem = "";
         Long idNovo = null;
-//        boolean ativo = true;
+        boolean ativo = true;
 
         if (S_Generico.textoEstaVazio(String.valueOf(dataini))) {
             podeSalvar = false;
@@ -43,7 +43,7 @@ public class S_Cronograma {
             m_cronograma.setDataini(dataini);
             m_cronograma.setDatafini(datafini);
             m_cronograma.setId_pessoa(m_usuario.getId());
-//            m_cronograma.setAtivo(ativo);
+            m_cronograma.setAtivo(ativo);
             try {
                 M_Cronograma novoCronograma = r_cronograma.save(m_cronograma);
                 idNovo = Long.valueOf(novoCronograma.getId());

@@ -86,7 +86,6 @@ function CriarCronograma(dataini, datafini, id) {
         '<td id="datafini'+id+'">' + endDate.toLocaleDateString() + ' ' + endDate.toLocaleTimeString() + '</td>' +
         '<td> <button id="'+id+'" class="btn btn-sm btn-primary id-referer">Criar</button>' +
         '<td> <button id="r'+id+'" class="btn btn-sm btn-danger id-referer-r">Remover</button>' +
-        '<td> <button id="d'+id+'" class="btn btn-sm btn-danger id-referer-d">Remover</button>' +
         '</tr>');
     $('#novaReserva').modal('hide');
     $('#'+id).click(PintaDia2);
@@ -214,7 +213,7 @@ function DisPintaDia() {
     }
 }
 
-$(".id-referer").click(deletaCronograma);
+$("#excluirCronograma").click(deletaCronograma);
 
 function deletaCronograma(){
     let nome = $("#nome").val();
@@ -228,6 +227,7 @@ function deletaCronograma(){
         success: function (data){
             if(data.sucesso){
                 alert(data.mensagem);
+
             }
         },
         error: function(){
