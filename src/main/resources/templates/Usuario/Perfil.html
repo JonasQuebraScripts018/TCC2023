@@ -1,8 +1,54 @@
-<div class="container" style="background: radial-gradient(#108dd3, #000);height: fit-content;">
-    <div class="mt-5">
-        <h1 class="text-center" th:text="${' Nome: ' + usuario.nome}"></h1>
-        <h3 class="text-center" th:text="${' E-email: ' + usuario.email} "></h3>
-        <h3 class="text-center" th:text="${' Idade: ' + usuario.idade}"></h3>
-        <h3 class="text-center" th:text="${' CPF: ' + usuario.cpf}"></h3>
+<div class="container mt-5 ">
+    <h2 style="color: white;">Detalhes do Perfil</h2>
+    <div class="row background: radial-gradient(rgb(16, 141, 211));">
+        <div class="input-group mb-3">
+            <h3 style="color: white;" th:text="${'Nome: '+usuario.nome}"></h3>
+        </div>
+        <div class="input-group mb-3">
+            <h3 style="color: white;" th:text="${'E-mail: '+usuario.email}"></h3>
+        </div>
+        <div class="input-group mb-3 col-6">
+            <h3 style="color: white;" th:text="${'CPF: '+usuario.cpf}"></h3>
+        </div>
+
+        <h2 style="color: white;">Atualizar Dados</h2>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="email"><i class="fa-solid fa-envelope"></i></span>
+            <input type="text" class="form-control" placeholder="E-mail Atual" aria-label="E-mail Atual"
+                   aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="emailNovo"><i class="fa-solid fa-envelope"></i></span>
+            <input type="text" class="form-control" placeholder="E-mail Novo" aria-label="E-mail Novo"
+                   aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="senhaAtual"><i class="fa-solid fa-key"></i></span>
+            <input type="password" class="form-control" placeholder="Senha Atual" aria-label="Senha Atual"
+                   aria-describedby="basic-addon1">
+        </div>
+
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="senhaNova"><i class="fa-solid fa-key"></i></span>
+            <input type="password" class="form-control" placeholder="Nova Senha" aria-label="Nova Senha"
+                   aria-describedby="basic-addon1">
+        </div>
+
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="confSenha"><i class="fa-solid fa-key"></i></span>
+            <input type="password" class="form-control" placeholder="Confirmar Nova Senha"
+                   aria-label="Confirmar Nova Senha"
+                   aria-describedby="basic-addon1">
+        </div>
+    </div>
+    <div class="col-sm-12 text-center">
+        <button type="submit" class="btn btn-success mb-5">Atualizar dados</button>
     </div>
 </div>
+</body>
+</html>

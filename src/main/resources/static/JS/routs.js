@@ -33,6 +33,7 @@ function controleRotasGet(url){
                             createCalendar(dataCalendario);
                         });
                         $("#enviarCronograma").click(trySaveInTheBank);
+                        $("#excluirCronograma").click(deletaCronograma);
                     });
 
                     break;

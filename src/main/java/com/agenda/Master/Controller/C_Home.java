@@ -32,14 +32,15 @@ public class C_Home {
     @ResponseBody
     public M_Resposta postHome(@RequestParam("dataini") LocalDateTime dataini,
                                @RequestParam("datafini") LocalDateTime datafini,
-                               HttpSession session
+                               HttpSession session,
+                               @RequestParam("nomeModal") String nome
                            ){
-        return S_Cronograma.salvarCronograma(dataini, datafini, (M_Usuario) session.getAttribute("usuario"));
+        return S_Cronograma.salvarCronograma(dataini, datafini, (M_Usuario) session.getAttribute("usuario"), nome);
     }
 
-    @PostMapping("/deletaCronogama")
+    @PostMapping("/delataCronograma")
     @ResponseBody
-    public M_Resposta postCronograma(@RequestParam("nome" )String nome,
+    public M_Resposta postCronograma(@RequestParam("nome") String nome,
                                     HttpSession session, Model model){
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return S_Cronograma.deletarCronograma(nome);

@@ -49,6 +49,7 @@ function alertaSucesso(mensagem){
 $("#enviarCronograma").click(trySaveInTheBank);
 
 function trySaveInTheBank(){
+    let nomeModal = $("#nomeModal").val();
     let dataini = $("#dataini").val();
     let datafini = $("#datafini").val();
 
@@ -61,13 +62,14 @@ function trySaveInTheBank(){
         type: "POST",
         url: "/home",
         data: {
+            nomeModal: nomeModal,
             dataini: dataini,
             datafini: datafini,
         },
         success: function (data){
             if(data.sucesso){
                 alert(data.mensagem);
-                PintaDia(dataini, datafini, data.id);
+                PintaDia(nomeModal,dataini, datafini, data.id);
             }
         },
         error: function (){
@@ -76,12 +78,13 @@ function trySaveInTheBank(){
     });
 }
 
-function CriarCronograma(dataini, datafini, id) {
+function CriarCronograma(nomeModal, dataini, datafini, id) {
     let startDate = new Date(dataini);
     let endDate = new Date(datafini);
 
     let numLinhas = $("#listaReservas tbody tr").length + 1;
     $("#listaReservas").prepend('<tr>' +
+        '<td id="nomeNovo">' + nomeModal + '</td>'+
         '<td id="dataini'+id+'">' + startDate.toLocaleDateString() +' '+ startDate.toLocaleTimeString() + '</td>' +
         '<td id="datafini'+id+'">' + endDate.toLocaleDateString() + ' ' + endDate.toLocaleTimeString() + '</td>' +
         '<td> <button id="'+id+'" class="btn btn-sm btn-primary id-referer">Criar</button>' +
@@ -92,7 +95,7 @@ function CriarCronograma(dataini, datafini, id) {
     $('#r'+id).click(DisPintaDia);
 }
 
-function PintaDia(dataini, datafini, id) {
+function PintaDia(nomeModal, dataini, datafini, id) {
     let startDate = new Date(dataini);
     let endDate = new Date(datafini);
 
@@ -108,7 +111,7 @@ function PintaDia(dataini, datafini, id) {
         currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    CriarCronograma(dataini, datafini, id);
+    CriarCronograma(nomeModal, dataini, datafini, id);
 }
 
 function PintaDia2(dataini, datafini) {
@@ -213,25 +216,31 @@ function DisPintaDia() {
     }
 }
 
-$("#excluirCronograma").click(deletaCronograma);
+// Aguarde o documento estar pronto antes de anexar o manipulador de evento
+$(document).ready(function() {
+    $("#excluirCronograma").click(deletaCronograma);
+});
 
-function deletaCronograma(){
+function deletaCronograma() {
     let nome = $("#nome").val();
 
     $.ajax({
         type: "POST",
-        url: "/home",
+        url: "/delataCronograma",
         data: {
-            nome : nome,
+            nome: nome,
         },
-        success: function (data){
-            if(data.sucesso){
+        success: function(data) {
+            if (data.sucesso) {
                 alert(data.mensagem);
-
+                $('#excluirCalendario').modal('hide');
+                 window.location.href="/home";
+            } else {
+                alert(data.mensagem);
             }
         },
-        error: function(){
-            alert("Erro");
+        error: function() {
+            alert("Ocorreu um erro durante a exclusão do Cronograma.");
         }
     });
 }
