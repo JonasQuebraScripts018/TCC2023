@@ -16,6 +16,6 @@ public interface R_Usuario extends JpaRepository<M_Usuario, Long> {
     @Query(value = "SELECT * FROM pessoa WHERE nome ILIKE '%'||:nome||'%'", nativeQuery = true)
     ArrayList<M_Usuario> BuscarPorNome(@Param("nome") String nome);
 
-    @Query(value = "SELECT * FROM pessoa WHERE email = :email", nativeQuery = true)
+    @Query(value = "SELECT * FROM pessoa WHERE email ILIKE '%'||:email||'%'", nativeQuery = true)
     M_Usuario BuscarPorEmail(@Param("email") String email);
 }

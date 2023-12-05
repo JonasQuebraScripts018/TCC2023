@@ -18,8 +18,9 @@ public class S_Usuario {
     private static JavaMailSender mailSender;
 
 
-    public S_Usuario(R_Usuario r_usuario){
+    public S_Usuario(R_Usuario r_usuario, JavaMailSender mailSender){
         this.r_usuario = r_usuario;
+        this.mailSender = mailSender;
     }
 
     public static M_Usuario varificarLogin(String cpf, String senha){
