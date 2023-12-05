@@ -19,14 +19,14 @@ $("#enviarCadastro").click(cadastro);
             },
             success: function (data){
                 if(data){
-                    alert("Deu bom");
+                    alert("Cadastro realizado com sucesso");
                     window.location.href="/";
                 }else{
-                    alert(data);
+                    alert(data.mensagem);
                 }
             },
             error: function (){
-                alert(data);
+                alert("Erro ao cadastrar");
             }
         });
     }

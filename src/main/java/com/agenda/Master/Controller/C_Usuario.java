@@ -1,5 +1,6 @@
 package com.agenda.Master.Controller;
 
+import com.agenda.Master.Model.M_Resposta;
 import com.agenda.Master.Service.S_Usuario;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -38,5 +39,11 @@ public class C_Usuario {
     public String logout(HttpSession session){
         session.setAttribute("usuario", null);
         return "redirect:/";
+    }
+
+    @PostMapping("/RecuperacaoDeSenha")
+    @ResponseBody
+    public M_Resposta recuperacao(@RequestParam("emailR") String emailR){
+        return S_Usuario.recuperarSenha(emailR);
     }
 }

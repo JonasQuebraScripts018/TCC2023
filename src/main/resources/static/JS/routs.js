@@ -37,12 +37,12 @@ function controleRotasGet(url){
                     });
 
                     break;
-        case "/edit/usuario":
-                            $.get(url,function(data){
-                                $("#mainFrame").html(data);
-                                $("#salvar").click(salvarPerfil);
-                            });
-                            break;
+        case "/Perfil":
+            $.get(url,function(data){
+                    $("#mainFrame").html(data);
+                    $("#recuperacao").click(recuperaSenha);
+            });
+        break;
         default:
             $.get(url,function(data){
                 $("#mainFrame").html(data);

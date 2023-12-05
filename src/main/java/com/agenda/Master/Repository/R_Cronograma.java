@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 public interface R_Cronograma extends JpaRepository<M_Cronograma, Long> {
-    @Query(value = "SELECT * FROM Cronogramas ", nativeQuery = true)
-    ArrayList<M_Cronograma> BuscarPorCronograma();
+    @Query(value = "SELECT * FROM Cronogramas WHERE nome = :nome and id_pessoa = :id_pessoa", nativeQuery = true)
+    ArrayList<M_Cronograma> BuscarPorCronograma(@Param("nome") String nome, @Param("id_pessoa") Long id_pessoa);
 
-    @Query(value = "SELECT * FROM Cronogramas WHERE nome = :nome", nativeQuery = true)
-    ArrayList<M_Cronograma> buscarNome(@Param("nome") String nome);
+    @Query(value = "SELECT * FROM Cronogramas WHERE id_pessoa = :id_pessoa", nativeQuery = true)
+    ArrayList<M_Cronograma> buscarCronogramaUsuario(@Param("id_pessoa") Long id_pessoa);
 }

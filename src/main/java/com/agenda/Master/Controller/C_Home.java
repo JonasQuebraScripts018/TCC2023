@@ -20,7 +20,7 @@ public class C_Home {
     @GetMapping("/home")
     public String getHome(HttpSession session, Model model){
         if(session.getAttribute("usuario") != null){
-            model.addAttribute("cronogramas",S_Cronograma.buscarCronograma());
+            model.addAttribute("cronogramas",S_Cronograma.buscarCronograma((M_Usuario) session.getAttribute("usuario")));
             model.addAttribute("usuario", session.getAttribute("usuario"));
             return "Home/home";
         }else{
@@ -43,14 +43,18 @@ public class C_Home {
     public M_Resposta postCronograma(@RequestParam("nome") String nome,
                                     HttpSession session, Model model){
         model.addAttribute("usuario", session.getAttribute("usuario"));
-        return S_Cronograma.deletarCronograma(nome);
+        return S_Cronograma.deletarCronograma(nome, (M_Usuario) session.getAttribute("usuario"));
     }
 
     @GetMapping("/hominha")
     public String getHominha(Model model, HttpSession session){
-        model.addAttribute("cronogramas",S_Cronograma.buscarCronograma());
-        model.addAttribute("usuario", session.getAttribute("usuario"));
-        return "Home/hominha";
+        if(session.getAttribute("usuario") != null){
+            model.addAttribute("cronogramas",S_Cronograma.buscarCronograma((M_Usuario) session.getAttribute("usuario")));
+            model.addAttribute("usuario", session.getAttribute("usuario"));
+            return "Home/hominha";
+        }else{
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/searchBar")

@@ -15,6 +15,8 @@ public class S_Cronograma {
     private static R_Cronograma r_cronograma;
     private static M_Usuario m_usuario;
 
+    private static M_Cronograma m_cronograma;
+
     public S_Cronograma(R_Cronograma r_cronograma){
         this.r_cronograma = r_cronograma;
     }
@@ -58,7 +60,7 @@ public class S_Cronograma {
         return new M_Resposta(mensagem,podeSalvar, idNovo);
     }
 
-    public static M_Resposta deletarCronograma(String nome){
+    public static M_Resposta deletarCronograma(String nome, M_Usuario usuario){
         boolean podeDeleta = true;
         String mensagem = "";
 
@@ -69,7 +71,7 @@ public class S_Cronograma {
 
         if(podeDeleta){
             try{
-                for(M_Cronograma cronograma : r_cronograma.buscarNome(nome))
+                for(M_Cronograma cronograma : r_cronograma.BuscarPorCronograma(nome, usuario.getId()))
                     r_cronograma.deleteById(cronograma.getId());
                 mensagem += "Cronograma excluido";
             }catch (Exception e){
@@ -79,7 +81,7 @@ public class S_Cronograma {
         return new M_Resposta(mensagem,podeDeleta,null);
     }
 
-    public static ArrayList<M_Cronograma> buscarCronograma(){
-        return r_cronograma.BuscarPorCronograma();
+    public static ArrayList<M_Cronograma> buscarCronograma(M_Usuario usuario){
+        return r_cronograma.buscarCronogramaUsuario(usuario.getId());
     }
 }

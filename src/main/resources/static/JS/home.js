@@ -244,3 +244,27 @@ function deletaCronograma() {
         }
     });
 }
+
+$("#recuperacao").click(recuperaSenha);
+
+function recuperaSenha(){
+    let emailR = $("#emailR").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/RecuperacaoDeSenha",
+        data: {
+            emailR : emailR,
+        },
+        success: function(data){
+            if(data){
+                alert("O E-mail foi enviado com sucesso");
+            }else{
+                alert(data.mensagem);
+            }
+        },
+        error: function(){
+            alert("Erro ao enviar o E-mail");
+        }
+    });
+}

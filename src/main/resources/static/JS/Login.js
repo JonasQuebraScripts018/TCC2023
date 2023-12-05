@@ -25,9 +25,10 @@ function Login(){
         },
         success: function(data){
             if(data){
+                alert("Login efetuado com sucesso!")
                 window.location.href="/home";
             }else{
-                alert(data);
+                alert("Login Invalido, revise os dados inseridos!");
             }
         },
         error: function (){

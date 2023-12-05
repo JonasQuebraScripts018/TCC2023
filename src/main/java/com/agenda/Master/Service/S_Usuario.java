@@ -1,9 +1,12 @@
 package com.agenda.Master.Service;
 
-import com.agenda.Master.Model.M_Cronograma;
+import com.agenda.Master.Model.M_Resposta;
 import com.agenda.Master.Model.M_Usuario;
 import com.agenda.Master.Repository.R_Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,6 +14,9 @@ import java.util.ArrayList;
 @Service
 public class S_Usuario {
     private static R_Usuario r_usuario;
+    @Autowired
+    private static JavaMailSender mailSender;
+
 
     public S_Usuario(R_Usuario r_usuario){
         this.r_usuario = r_usuario;
@@ -27,7 +33,7 @@ public class S_Usuario {
         return r_usuario.BuscarPorCpfSenha(Long.parseLong(cpf), senha);
     }
 
-    public static String cadastrarUsuario(String nome, String idade, String email, String cpf, String senha){
+    public static M_Resposta cadastrarUsuario(String nome, String idade, String email, String cpf, String senha){
         boolean podeEnviar = true;
         String mensagem = "";
         cpf = S_Generico.cleanerNumber(cpf);
@@ -66,7 +72,7 @@ public class S_Usuario {
                 mensagem += "Deu ruim";
             }
         }
-        return mensagem;
+        return new M_Resposta(mensagem,podeEnviar,null);
     }
 
     public static ArrayList<M_Usuario> searchbar(String nome){
@@ -81,5 +87,31 @@ public class S_Usuario {
             }
         }
         return null;
+    }
+
+
+    public static M_Resposta recuperarSenha(String emailR) {
+        String mensagem = "";
+        boolean podeRecuperar = true;
+
+        if(!S_Generico.validarEmail(emailR)) {
+            podeRecuperar = false;
+            mensagem = "E-mail Invalido";
+        }
+
+        if(podeRecuperar) {
+            M_Usuario usuario = r_usuario.BuscarPorEmail(emailR);
+
+            if(usuario != null) {
+                SimpleMailMessage message = new SimpleMailMessage();
+                message.setTo(emailR);
+                message.setSubject("Recuperação de Senha Agenda Master");
+                message.setText("Sua senha é: "+usuario.getSenha());
+                mailSender.send(message);
+            }else{
+                mensagem += "Error ao inviar";
+            }
+        }
+        return new M_Resposta(mensagem, podeRecuperar, null);
     }
 }
