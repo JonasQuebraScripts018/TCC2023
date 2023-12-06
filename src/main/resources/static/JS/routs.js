@@ -40,6 +40,8 @@ function controleRotasGet(url){
         case "/Perfil":
             $.get(url,function(data){
                     $("#mainFrame").html(data);
+                    $("#salvarEditSenha").click(editSenha);
+                    $("#salvarEdit").click(editEmail);
                     $("#recuperacao").click(recuperaSenha);
             });
         break;

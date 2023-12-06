@@ -32,7 +32,7 @@ function Login(){
             }
         },
         error: function (){
-            alert(data);
+            alert("Error ao tentar realizar login!");
         }
     });
 }

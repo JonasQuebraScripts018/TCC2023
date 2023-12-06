@@ -34,6 +34,28 @@ public class C_Usuario {
         model.addAttribute("usuario", session.getAttribute("usuario"));
         return "Usuario/Perfil";
     }
+    @PostMapping("/senha")
+    @ResponseBody
+    public M_Resposta postEditSenha(@RequestParam("nome") String nome,
+                                    @RequestParam("idade") String idade,
+                                    @RequestParam("email") String email,
+                                    @RequestParam("cpf") String cpf,
+                                    @RequestParam("senhaAtual") String senhaAtual,
+                                    @RequestParam("senhaNova") String senhaNova,
+                                    @RequestParam("confSenha") String confSenha){
+        return S_Usuario.editSenha(nome,idade,email,cpf,senhaAtual,senhaNova,confSenha);
+    }
+
+    @PostMapping("/email")
+    @ResponseBody
+    public M_Resposta postEditEmail(@RequestParam("nome") String nome,
+                                    @RequestParam("idade") String idade,
+                                    @RequestParam("emailAtual") String emailAtual,
+                                    @RequestParam("emailNovo") String emailNovo,
+                                    @RequestParam("cpf") String cpf,
+                                    @RequestParam("senha") String senha){
+        return S_Usuario.editEmail(nome,idade,emailAtual,emailNovo,cpf,senha);
+    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session){

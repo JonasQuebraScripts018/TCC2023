@@ -12,56 +12,80 @@
         </div>
 
         <h2 style="color: white;">Atualizar Dados</h2>
-
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="email"><i class="fa-solid fa-envelope"></i></span>
-            <input type="text" class="form-control" placeholder="E-mail Atual" aria-label="E-mail Atual"
-                   aria-describedby="basic-addon1">
+        <div class="modal fade" id="editUsuario" tabindex="-1" aria-labelledby="editUsuarioTitle" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editUsuarioTitle">Atualizar E-mail</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <label>Atualização de Dados</label>
+                                <input id="nome" class="form-control mb-1 mt-1" placeholder="Nome" type="text">
+                                <input id="cpf" class="form-control mb-1" placeholder="CPF" type="text"/>
+                                <input id="idade" class="form-control mb-1" placeholder="Idade" type="text"/>
+                                <input id="senha" class="form-control mb-1" placeholder="Senha" type="text"/>
+                                <input id="email" class="form-control mb-1" placeholder="E-mail Atual" type="text"/>
+                                <input id="emailNovo" class="form-control mb-1" placeholder="E-mail Novo" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <a id="salvarEdit" type="submit" class="btn btn-primary">Salvar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editUsuarioSenha" tabindex="-1" aria-labelledby="editUsuarioSenhaTitle" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editUsuarioSenhaTitle">Atualização Senha</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Atualização de Dados</label>
+                            <input id="nomeSenha" class="form-control mb-1 mb-1" placeholder="Nome" type="text">
+                            <input id="cpfSenha" class="form-control mb-1" placeholder="CPF" type="text"/>
+                            <input id="emailSenha" class="form-control mb-1" placeholder="E-mail" type="text"/>
+                            <input id="idadeSenha" class="form-control mb-1" placeholder="Idade" type="text"/>
+                            <input id="senhaAtual" class="form-control mb-1" placeholder="Senha Atual" type="text"/>
+                            <input id="senhaNova" class="form-control mb-1" placeholder="Senha Nova" type="text"/>
+                            <input id="confSenha" class="form-control mb-1" placeholder="Confirmação de Senha" type="text"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <a id="salvarEditSenha" type="submit" class="btn btn-primary">Salvar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-sm-6 text-center ">
+            <h3 style="color: white;" class="text-center">Clique aqui para editar seu E-mail</h3>
+            <button class="btn btn-success mb-5" data-bs-toggle="modal" data-bs-target="#editUsuario" type="submit">Atualizar Email</button>
         </div>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="emailNovo"><i class="fa-solid fa-envelope"></i></span>
-            <input type="text" class="form-control" placeholder="E-mail Novo" aria-label="E-mail Novo"
-                   aria-describedby="basic-addon1">
+        <div class="col-sm-6 text-center">
+            <h3 style="color: white;" class="text-center">Clique aqui para editar sua Senha</h3>
+            <button data-bs-toggle="modal" data-bs-target="#editUsuarioSenha" type="submit" class="btn btn-success mb-5">Atualizar Senha</button>
         </div>
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+        <input type="text" id="emailR" class="form-control" placeholder="Email para recuperação"
+               aria-describedby="basic-addon1">
+    </div>
 
-        <div class="col-sm-12 text-center">
-            <button class="btn btn-success mb-5" type="submit">Atualizar Email</button>
-        </div>
-
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="senhaAtual"><i class="fa-solid fa-key"></i></span>
-            <input type="password" class="form-control" placeholder="Senha Atual" aria-label="Senha Atual"
-                   aria-describedby="basic-addon1">
-        </div>
-
-
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="senhaNova"><i class="fa-solid fa-key"></i></span>
-            <input type="password" class="form-control" placeholder="Nova Senha" aria-label="Nova Senha"
-                   aria-describedby="basic-addon1">
-        </div>
-
-
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="confSenha"><i class="fa-solid fa-key"></i></span>
-            <input type="password" class="form-control" placeholder="Confirmar Nova Senha"
-                   aria-label="Confirmar Nova Senha"
-                   aria-describedby="basic-addon1">
-        </div>
-
-        <div class="col-sm-12 text-center">
-            <button type="submit" class="btn btn-success mb-5">Atualizar dados</button>
-        </div>
-
-        <div class="input-group mb-3">
-            <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-            <input type="text" id="emailR" class="form-control" placeholder="Email para recuperação"
-                   aria-describedby="basic-addon1">
-        </div>
-
-        <div class="col-sm-12 text-center mb-5">
-            <button id="recuperacao" class="btn btn-primary" type="submit">Recuperar Senha</button>
-        </div>
+    <div class="col-sm-12 text-center mb-5">
+        <button id="recuperacao" class="btn btn-primary" type="submit">Recuperar Senha</button>
     </div>
 </div>
